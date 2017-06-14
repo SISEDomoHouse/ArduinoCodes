@@ -17,7 +17,7 @@ const unsigned long SEND_Timer = 5000;  //Delay between SEND updates, 5000 milli
 const unsigned int SENTVARS = 1;  //Number of sensor vars sent to REST Web App, (idHome, Temp & Humid, TimeStamp)
 const char* SSID = "domohouse"; //WiFi SSID, change nombre-wifi por la red propia
 const char* PASSWORD = "1234567890"; //WiFi Pass, coloque el password real
-const char* HOST = "http://87380993.ngrok.io";  //REST Web Host, replace by real 'server' url
+const char* HOST = "http://server";  //REST Web Host, replace by real 'server' url
 
 String appName = "/sensor";
 String serviceSaveSensors = "/create";  //Name of the service SAVESENSORS
@@ -82,7 +82,7 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
   if (millis() - lastConnectionTime > SEND_Timer) {
-    propertyValues[0] = "emontoya";
+    propertyValues[0] = "sensor";
     SEND(SENTVARS, propertyNames, propertyValues);
     lastConnectionTime = millis();
   }
