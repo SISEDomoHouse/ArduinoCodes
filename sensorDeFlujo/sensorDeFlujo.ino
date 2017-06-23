@@ -82,7 +82,7 @@ void setup() {
   Serial.begin(9600);
   propertyValues[0] = "1"; // sensor_id
   propertyValues[1] = "1"; // variable_id
-  litros[1]= -1;
+  litros[1] = -1;
   pinMode(sensorDeFlujo, INPUT);
 
   for (uint8_t t = 4; t > 0; t--) {
@@ -100,24 +100,21 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-    
-    litros[0] = pulsos*1.0/400;
-    
-    if (millis() - lastConnectionTime > SEND_Timer) {
-      propertyValues[0] = "1";
-      propertyValues[1] = "1";
-      propertyValues[2] = litros[0];
-      Serial.print(litros[0]);
-      Serial.print(" ");
-      Serial.println(litros[1]);
-      if(litros[0]>litros[1]){
-        SEND(SENTVARS, propertyNames, propertyValues);
-        Serial.println("Entró");
-      }
-      lastConnectionTime = millis();
+
+  litros[0] = pulsos * 1.0 / 400;
+
+  if (millis() - lastConnectionTime > SEND_Timer) {
+    propertyValues[0] = "1";
+    propertyValues[1] = "1";
+    propertyValues[2] = litros[0];
+
+    if (litros[0] > litros[1]) {
+      SEND(SENTVARS, propertyNames, propertyValues);
     }
-    
-    
+    lastConnectionTime = millis();
+  }
+
+
 
 
 
